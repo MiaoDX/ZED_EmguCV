@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+using CameraRelocationSystem.Device;
+
 namespace ZED_Emgu
 {
     public partial class Form1 : Form
@@ -15,5 +17,6 @@ namespace ZED_Emgu
         {
             InitializeComponent();
         }
+
     }
 }

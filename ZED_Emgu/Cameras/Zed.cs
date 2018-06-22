@@ -64,7 +64,7 @@ namespace ZED_Emgu.Cameras
 
         // constructor
 
-        //public Zed(string svoPath) : this(null, svoPath) { }
+        public Zed(string svoPath) : this(null, svoPath) { }
 
         public Zed(InitParameters parameters = null, string svoPath = null)
         {
@@ -177,6 +177,7 @@ namespace ZED_Emgu.Cameras
 
         public void Start_Sequential()
         {
+            if (running == true) return;
             InitZED_Sequential();
             running = true;
         }
@@ -201,6 +202,39 @@ namespace ZED_Emgu.Cameras
             }
         }
 
+
+        public void Start_with_Thread()
+        {
+            this.Start_Sequential();
+
+            running = true;
+
+            var thread = new Thread(GrabLoop) { IsBackground = true };
+            thread.Start();
+
+            //thread.Join();
+        }
+
+        private void GrabLoop()
+        {
+
+            while (running)
+            {
+                lock (grabLock)
+                {
+                    sl.ERROR_CODE e = camera.Grab(ref runtimeParameters);
+
+                    // reset mat index
+                    matIndex = 0;
+
+                    // call the listener
+                    this.FrameTick(this);
+                    Thread.Sleep(10);
+                }
+            }
+        }
+
+
         public void Stop()
         {
             this.running = false;
@@ -210,6 +244,12 @@ namespace ZED_Emgu.Cameras
         {
             camera.Destroy();
         }
+
+        public void TT()
+        {
+            camera.SetCameraSettings();
+        }
+
     }
 
 }

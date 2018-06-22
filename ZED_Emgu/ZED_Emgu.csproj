@@ -63,6 +63,9 @@
     <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
     <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Emgu.CV">
       <HintPath>..\..\..\..\..\CameraRelocationSystem\libemgucv-windows-universal-2.4.10.1940\bin\Emgu.CV.dll</HintPath>
@@ -97,12 +100,33 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="GUIControl\ZEDCameraSettings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUIControl\ZEDCameraSettings.Designer.cs">
+      <DependentUpon>ZEDCameraSettings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUIControl\ZEDCommonSettingPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUIControl\ZEDCommonSettingPage.Designer.cs">
+      <DependentUpon>ZEDCommonSettingPage.cs</DependentUpon>
+    </Compile>
     <Compile Include="NativeInterface\ZEDCamera.cs" />
     <Compile Include="NativeInterface\ZEDCameraSettingsManager.cs" />
     <Compile Include="NativeInterface\ZEDCommon.cs" />
     <Compile Include="NativeInterface\ZEDMat.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUIControl\ZEDCameraSettings.resx">
+      <DependentUpon>ZEDCameraSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUIControl\ZEDCommonSettingPage.resx">
+      <DependentUpon>ZEDCommonSettingPage.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
