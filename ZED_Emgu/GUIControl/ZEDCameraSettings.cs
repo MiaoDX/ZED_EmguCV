@@ -33,8 +33,11 @@ namespace CameraRelocationSystem.Device
             {
                 commonPage.setCamera(this.camera.Camera);
                 commonPage.setConnectStatus(true);
-                Show();
+
                 commonPage.changeGUIFromCurrentSettings(); // INIT GUI();
+                
+                Show();
+                
             }
             catch (Exception e)
             {

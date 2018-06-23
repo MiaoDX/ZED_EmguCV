@@ -95,7 +95,7 @@ namespace CameraRelocationSystem.Device
             if (cb.Checked)
             {
                 AWBTrackBar.Enabled = false;
-                m_camera.SetCameraSettings(sl.CAMERA_SETTINGS.WHITEBALANCE, v, true);
+                m_camera.SetCameraSettings(sl.CAMERA_SETTINGS.WHITEBALANCE, -1, true);
             }
             else
             {
@@ -155,9 +155,8 @@ namespace CameraRelocationSystem.Device
             {
                 GainTrackBar.Enabled = false;
                 ExposureTrackBar.Enabled = false;
-
-                m_camera.SetCameraSettings(sl.CAMERA_SETTINGS.GAIN, v_g, true);
-                m_camera.SetCameraSettings(sl.CAMERA_SETTINGS.EXPOSURE, v_e, true);
+                m_camera.SetCameraSettings(sl.CAMERA_SETTINGS.GAIN, -1, true);
+                m_camera.SetCameraSettings(sl.CAMERA_SETTINGS.EXPOSURE, -1, true);
             }
             else
             {
@@ -179,10 +178,8 @@ namespace CameraRelocationSystem.Device
 
         public void changeGUIFromCurrentSettings()
         {
-            m_camera.RetrieveCameraSettings();
+            m_camera.RetrieveCameraSettings(); // this will make the whiteBalance not -1 but previous value when autoWhitebalance, please note this
             ZEDCameraSettingsManager.CameraSettings settings = m_camera.GetCameraSettings();
-            bool GEAuto = m_camera.GetExposureUpdateType();
-            bool whiteBalanceAuto = m_camera.GetWhiteBalanceUpdateType();
 
             int hue = settings.Hue;
             int brightness = settings.Brightness;
@@ -193,10 +190,6 @@ namespace CameraRelocationSystem.Device
             int gain = settings.Gain;
 
             int whiteBalance = settings.WhiteBalance;
-
-            m_camera.SetCameraSettings(sl.CAMERA_SETTINGS.GAIN, gain, GEAuto);
-            m_camera.SetCameraSettings(sl.CAMERA_SETTINGS.EXPOSURE, exposure, GEAuto);
-            m_camera.SetCameraSettings(sl.CAMERA_SETTINGS.WHITEBALANCE, whiteBalance, whiteBalanceAuto);
 
             
 
@@ -213,30 +206,44 @@ namespace CameraRelocationSystem.Device
             SaturationTrackBar.Value = saturation;
             SaturationTextBox.Text = saturation.ToString();
 
-
-
-
-            AWBAutoCheckBox.Checked = whiteBalanceAuto;
+            
+            if (whiteBalance == -1)
+                whiteBalance = 2600;
+            AWBTrackBar.Value = whiteBalance/100;
+            AWBTextBox.Text = whiteBalance.ToString();
             if (AWBAutoCheckBox.Checked) // AUTO
             {
                 AWBTrackBar.Enabled = false;
+
+                m_camera.SetCameraSettings(sl.CAMERA_SETTINGS.WHITEBALANCE, 0, true);
+               
             }
             else
             {
                 AWBTrackBar.Enabled = true;
             }
 
-
-            GECheckBox.Checked = GEAuto;
+            if (exposure == -1)
+                exposure = 0;
+            if (gain == -1)
+                gain = 0;
+            GainTrackBar.Value = gain;
+            ExposureTrackBar.Value = exposure;
+            GainTextBox.Text = gain.ToString();
+            ExposureTextBox.Text = exposure.ToString();
             if (GECheckBox.Checked)
             {
                 GainTrackBar.Enabled = false;
                 ExposureTrackBar.Enabled = false;
+
+                m_camera.SetCameraSettings(sl.CAMERA_SETTINGS.GAIN, 0, true); // NOTE 0, should has no imapct
+                m_camera.SetCameraSettings(sl.CAMERA_SETTINGS.EXPOSURE, 0, true);
             }
             else
             {
                 GainTrackBar.Enabled = true;
                 ExposureTrackBar.Enabled = true;
+
             }
 
         }
@@ -258,11 +265,13 @@ namespace CameraRelocationSystem.Device
 
             if (auto) // NOT so sure why no action when auto==false, the reference code is like this
             {
-                m_camera.SetCameraSettings(sl.CAMERA_SETTINGS.WHITEBALANCE, cwhiteBalance, true);
+                m_camera.SetCameraSettings(sl.CAMERA_SETTINGS.WHITEBALANCE, 0, true);
                 m_camera.SetCameraSettings(sl.CAMERA_SETTINGS.GAIN, 0, true); // NOTE 0, should has no imapct
                 m_camera.SetCameraSettings(sl.CAMERA_SETTINGS.EXPOSURE, 0, true);
             }
 
+            AWBAutoCheckBox.Checked = true;
+            GECheckBox.Checked = true;
             changeGUIFromCurrentSettings();
         }
 

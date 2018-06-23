@@ -180,9 +180,16 @@ public class ZEDCameraSettingsManager
             zedCamera.SetCameraSettings(sl.CAMERA_SETTINGS.SATURATION, settings_.Saturation, false);
             zedCamera.SetCameraSettings(sl.CAMERA_SETTINGS.GAIN, settings_.Gain, false);
             zedCamera.SetCameraSettings(sl.CAMERA_SETTINGS.EXPOSURE, settings_.Exposure, false);
-            if (settings_.WhiteBalance != -1)
+            zedCamera.SetCameraSettings(sl.CAMERA_SETTINGS.WHITEBALANCE, settings_.WhiteBalance, false);
+
+            if (auto)
             {
-                zedCamera.SetCameraSettings(sl.CAMERA_SETTINGS.WHITEBALANCE, settings_.WhiteBalance, false);
+                zedCamera.SetCameraSettings(sl.CAMERA_SETTINGS.GAIN, -1, true);
+                zedCamera.SetCameraSettings(sl.CAMERA_SETTINGS.EXPOSURE, -1, true);
+            }
+            if (whiteBalanceAuto)
+            {
+                zedCamera.SetCameraSettings(sl.CAMERA_SETTINGS.WHITEBALANCE, -1, true);
             }
         }
     }
@@ -244,9 +251,10 @@ public class ZEDCameraSettingsManager
                 }
             }
         }
-        SetSettings(zedCamera);
         auto = (settings_.Exposure == -1);
         whiteBalanceAuto = (settings_.WhiteBalance == -1);
+
+        SetSettings(zedCamera);
     }
 
 
