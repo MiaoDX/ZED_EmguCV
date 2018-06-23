@@ -76,7 +76,7 @@ namespace ZED_Emgu.Cameras
             {
                 parameters = new InitParameters();
                 parameters.resolution = RESOLUTION.HD720;
-                parameters.depthMode = DEPTH_MODE.MEDIUM;
+                parameters.depthMode = DEPTH_MODE.QUALITY;
                 parameters.depthStabilization = true;
                 parameters.enableRightSideMeasure = true; // isStereoRig;
 
@@ -103,7 +103,7 @@ namespace ZED_Emgu.Cameras
             camera.CreateCamera(true);
         }
 
-        public Zed(RESOLUTION resolution, DEPTH_MODE depthMode = DEPTH_MODE.PERFORMANCE, bool stabilisation = false)
+        public Zed(RESOLUTION resolution, DEPTH_MODE depthMode = DEPTH_MODE.QUALITY, bool stabilisation = true)
             : this(new InitParameters
             {
                 resolution = resolution,

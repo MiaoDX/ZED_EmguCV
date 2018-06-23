@@ -697,7 +697,7 @@ namespace sl
             dll_initParameters initP = new dll_initParameters(initParameters);
             initP.coordinateSystem = COORDINATE_SYSTEM.LEFT_HANDED_Y_UP;
 
-            initParameters.sdkVerboseLogFile = "D:/tmp/sdl_log.txt";
+            initParameters.sdkVerboseLogFile = "zed_sdl_log.txt";
             int v = dllz_open(ref initP, new System.Text.StringBuilder(initParameters.pathSVO, initParameters.pathSVO.Length),
                new System.Text.StringBuilder(initParameters.sdkVerboseLogFile, initParameters.sdkVerboseLogFile.Length));
 

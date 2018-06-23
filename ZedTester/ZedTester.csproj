@@ -67,13 +67,13 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Emgu.CV">
-      <HintPath>..\..\..\..\..\CameraRelocationSystem\libemgucv-windows-universal-2.4.10.1940\bin\Emgu.CV.dll</HintPath>
+      <HintPath>..\..\CameraRelocationSystem for DH\CameraRelocationSystem\Dll\ManualPtsMatch\Emgu.CV.dll</HintPath>
     </Reference>
     <Reference Include="Emgu.CV.UI">
-      <HintPath>..\..\..\..\..\CameraRelocationSystem\libemgucv-windows-universal-2.4.10.1940\bin\Emgu.CV.UI.dll</HintPath>
+      <HintPath>..\..\CameraRelocationSystem for DH\CameraRelocationSystem\Dll\ManualPtsMatch\Emgu.CV.UI.dll</HintPath>
     </Reference>
     <Reference Include="Emgu.Util">
-      <HintPath>..\..\..\..\..\CameraRelocationSystem\libemgucv-windows-universal-2.4.10.1940\bin\Emgu.Util.dll</HintPath>
+      <HintPath>..\..\CameraRelocationSystem for DH\CameraRelocationSystem\Dll\ManualPtsMatch\Emgu.Util.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -84,6 +84,9 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="ZedGraph">
+      <HintPath>..\..\CameraRelocationSystem for DH\CameraRelocationSystem\Dll\ManualPtsMatch\ZedGraph.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Form1.cs">

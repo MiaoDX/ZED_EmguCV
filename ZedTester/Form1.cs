@@ -40,7 +40,8 @@ namespace ZedTester
             //var zed = new Zed(@"c:\Projects\files\HD720_SN17600_11-04-52.svo");
 
             // start with live feed
-            zed = new Zed();
+            // zed = new Zed();
+            zed = new Zed(RESOLUTION.HD1080);
 
             // You need to assign the listener that will execute in each camera loop
             // in this case I named it AcquireImages and implemented it below
